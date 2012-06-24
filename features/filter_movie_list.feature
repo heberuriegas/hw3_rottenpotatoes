@@ -23,13 +23,25 @@ Background: movies have been added to database
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
+  When I check the following ratings: G, PG
   # enter step(s) to uncheck all other checkboxes
+  And I uncheck the following ratings: PG-13, R
   # enter step to "submit" the search form on the homepage
+  Then I press "Refresh"
   # enter step(s) to ensure that PG and R movies are visible
+  Then I should see "Aladdin"
+  And I should see "The Incredibles" 
   # enter step(s) to ensure that other movies are not visible
-
+  And I should not see "Amelie"
+  
 Scenario: no ratings selected
   # see assignment
+  When I uncheck the following ratings: G, PG, PG-13, R
+  And I press "Refresh"
+  Then I should not see any movie
 
 Scenario: all ratings selected
   # see assignment
+  When I check the following ratings: G, PG, PG-13, R
+  And I press "Refresh"
+  Then I should see all of the movies

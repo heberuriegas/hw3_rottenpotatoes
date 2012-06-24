@@ -38,3 +38,6 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'haml'
+
+# For print with tabs
+gem 'awesome_print'
